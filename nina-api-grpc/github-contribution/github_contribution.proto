@@ -1,9 +1,10 @@
 syntax = "proto3";
 
-option go_package = "github.com/ningenme/mami-interface/nina-api-grpc";
 import "google/protobuf/empty.proto";
 
 package nina;
+
+option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/github-contribution";
 
 service GithubContribution {
   rpc Get (google.protobuf.Empty) returns (GetResponse) {}

@@ -4,7 +4,7 @@
 // - protoc             v3.21.5
 // source: github_contribution.proto
 
-package nina_api_grpc
+package github_contribution
 
 import (
 	context "context"
