@@ -4,7 +4,7 @@
 // - protoc             v3.21.5
 // source: github_contribution.proto
 
-package github_contribution
+package mami
 
 import (
 	context "context"
