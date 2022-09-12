@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GithubContributionClient interface {
-	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error)
+	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGithubContributionResponse, error)
 }
 
 type githubContributionClient struct {
@@ -34,8 +34,8 @@ func NewGithubContributionClient(cc grpc.ClientConnInterface) GithubContribution
 	return &githubContributionClient{cc}
 }
 
-func (c *githubContributionClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
-	out := new(GetResponse)
+func (c *githubContributionClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGithubContributionResponse, error) {
+	out := new(GetGithubContributionResponse)
 	err := c.cc.Invoke(ctx, "/nina.GithubContribution/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (c *githubContributionClient) Get(ctx context.Context, in *emptypb.Empty, o
 // All implementations must embed UnimplementedGithubContributionServer
 // for forward compatibility
 type GithubContributionServer interface {
-	Get(context.Context, *emptypb.Empty) (*GetResponse, error)
+	Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error)
 	mustEmbedUnimplementedGithubContributionServer()
 }
 
@@ -55,7 +55,7 @@ type GithubContributionServer interface {
 type UnimplementedGithubContributionServer struct {
 }
 
-func (UnimplementedGithubContributionServer) Get(context.Context, *emptypb.Empty) (*GetResponse, error) {
+func (UnimplementedGithubContributionServer) Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedGithubContributionServer) mustEmbedUnimplementedGithubContributionServer() {}
