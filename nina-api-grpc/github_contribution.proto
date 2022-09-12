@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/ningenme/mami-interface/nina-api-grpc";
+import "google/protobuf/empty.proto";
+
+package nina;
+
+service GithubContribution {
+  rpc Get (google.protobuf.Empty) returns (GetResponse) {}
+}
+
+message GetResponse {
+  string contributedAt = 1;
+  string organization = 2;
+  string repository = 3;
+  string user = 4;
+  string status = 5;
+}
