@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GithubContributionClient interface {
 	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGithubContributionResponse, error)
+	Post(ctx context.Context, opts ...grpc.CallOption) (GithubContribution_PostClient, error)
 }
 
 type githubContributionClient struct {
@@ -43,11 +44,46 @@ func (c *githubContributionClient) Get(ctx context.Context, in *emptypb.Empty, o
 	return out, nil
 }
 
+func (c *githubContributionClient) Post(ctx context.Context, opts ...grpc.CallOption) (GithubContribution_PostClient, error) {
+	stream, err := c.cc.NewStream(ctx, &GithubContribution_ServiceDesc.Streams[0], "/nina.GithubContribution/Post", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &githubContributionPostClient{stream}
+	return x, nil
+}
+
+type GithubContribution_PostClient interface {
+	Send(*PostGithubContributionRequest) error
+	CloseAndRecv() (*emptypb.Empty, error)
+	grpc.ClientStream
+}
+
+type githubContributionPostClient struct {
+	grpc.ClientStream
+}
+
+func (x *githubContributionPostClient) Send(m *PostGithubContributionRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *githubContributionPostClient) CloseAndRecv() (*emptypb.Empty, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(emptypb.Empty)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // GithubContributionServer is the server API for GithubContribution service.
 // All implementations must embed UnimplementedGithubContributionServer
 // for forward compatibility
 type GithubContributionServer interface {
 	Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error)
+	Post(GithubContribution_PostServer) error
 	mustEmbedUnimplementedGithubContributionServer()
 }
 
@@ -57,6 +93,9 @@ type UnimplementedGithubContributionServer struct {
 
 func (UnimplementedGithubContributionServer) Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedGithubContributionServer) Post(GithubContribution_PostServer) error {
+	return status.Errorf(codes.Unimplemented, "method Post not implemented")
 }
 func (UnimplementedGithubContributionServer) mustEmbedUnimplementedGithubContributionServer() {}
 
@@ -89,6 +128,32 @@ func _GithubContribution_Get_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GithubContribution_Post_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(GithubContributionServer).Post(&githubContributionPostServer{stream})
+}
+
+type GithubContribution_PostServer interface {
+	SendAndClose(*emptypb.Empty) error
+	Recv() (*PostGithubContributionRequest, error)
+	grpc.ServerStream
+}
+
+type githubContributionPostServer struct {
+	grpc.ServerStream
+}
+
+func (x *githubContributionPostServer) SendAndClose(m *emptypb.Empty) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *githubContributionPostServer) Recv() (*PostGithubContributionRequest, error) {
+	m := new(PostGithubContributionRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // GithubContribution_ServiceDesc is the grpc.ServiceDesc for GithubContribution service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -101,6 +166,12 @@ var GithubContribution_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GithubContribution_Get_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Post",
+			Handler:       _GithubContribution_Post_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "github_contribution.proto",
 }

@@ -8,9 +8,7 @@ option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami";
 
 service GithubContribution {
   rpc Get (google.protobuf.Empty) returns (GetGithubContributionResponse) {}
-}
-message GetGithubContributionResponse {
-  repeated Contribution contributions = 1;
+  rpc Post (stream PostGithubContributionRequest) returns (google.protobuf.Empty) {}
 }
 message Contribution {
   string contributedAt = 1;
@@ -19,3 +17,10 @@ message Contribution {
   string user = 4;
   string status = 5;
 }
+message GetGithubContributionResponse {
+  repeated Contribution contributions = 1;
+}
+message PostGithubContributionRequest {
+  repeated Contribution contributions = 1;
+}
+
