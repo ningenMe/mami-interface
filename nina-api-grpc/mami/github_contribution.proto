@@ -21,6 +21,6 @@ message GetGithubContributionResponse {
   repeated Contribution contributions = 1;
 }
 message PostGithubContributionRequest {
-  repeated Contribution contributions = 1;
+  Contribution contribution = 1;
 }
 
