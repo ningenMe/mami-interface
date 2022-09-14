@@ -5,7 +5,7 @@ import "google/protobuf/empty.proto";
 option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami";
 package nina;
 
-service Health {
+service HealthService {
   rpc Get (google.protobuf.Empty) returns (GetHealthResponse) {}
 }
 message GetHealthResponse {

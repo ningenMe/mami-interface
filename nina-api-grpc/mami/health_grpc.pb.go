@@ -19,86 +19,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// HealthClient is the client API for Health service.
+// HealthServiceClient is the client API for HealthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type HealthClient interface {
+type HealthServiceClient interface {
 	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetHealthResponse, error)
 }
 
-type healthClient struct {
+type healthServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewHealthClient(cc grpc.ClientConnInterface) HealthClient {
-	return &healthClient{cc}
+func NewHealthServiceClient(cc grpc.ClientConnInterface) HealthServiceClient {
+	return &healthServiceClient{cc}
 }
 
-func (c *healthClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetHealthResponse, error) {
+func (c *healthServiceClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetHealthResponse, error) {
 	out := new(GetHealthResponse)
-	err := c.cc.Invoke(ctx, "/nina.Health/Get", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/nina.HealthService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// HealthServer is the server API for Health service.
-// All implementations must embed UnimplementedHealthServer
+// HealthServiceServer is the server API for HealthService service.
+// All implementations must embed UnimplementedHealthServiceServer
 // for forward compatibility
-type HealthServer interface {
+type HealthServiceServer interface {
 	Get(context.Context, *emptypb.Empty) (*GetHealthResponse, error)
-	mustEmbedUnimplementedHealthServer()
+	mustEmbedUnimplementedHealthServiceServer()
 }
 
-// UnimplementedHealthServer must be embedded to have forward compatible implementations.
-type UnimplementedHealthServer struct {
+// UnimplementedHealthServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedHealthServiceServer struct {
 }
 
-func (UnimplementedHealthServer) Get(context.Context, *emptypb.Empty) (*GetHealthResponse, error) {
+func (UnimplementedHealthServiceServer) Get(context.Context, *emptypb.Empty) (*GetHealthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedHealthServer) mustEmbedUnimplementedHealthServer() {}
+func (UnimplementedHealthServiceServer) mustEmbedUnimplementedHealthServiceServer() {}
 
-// UnsafeHealthServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to HealthServer will
+// UnsafeHealthServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to HealthServiceServer will
 // result in compilation errors.
-type UnsafeHealthServer interface {
-	mustEmbedUnimplementedHealthServer()
+type UnsafeHealthServiceServer interface {
+	mustEmbedUnimplementedHealthServiceServer()
 }
 
-func RegisterHealthServer(s grpc.ServiceRegistrar, srv HealthServer) {
-	s.RegisterService(&Health_ServiceDesc, srv)
+func RegisterHealthServiceServer(s grpc.ServiceRegistrar, srv HealthServiceServer) {
+	s.RegisterService(&HealthService_ServiceDesc, srv)
 }
 
-func _Health_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HealthService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HealthServer).Get(ctx, in)
+		return srv.(HealthServiceServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nina.Health/Get",
+		FullMethod: "/nina.HealthService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HealthServer).Get(ctx, req.(*emptypb.Empty))
+		return srv.(HealthServiceServer).Get(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Health_ServiceDesc is the grpc.ServiceDesc for Health service.
+// HealthService_ServiceDesc is the grpc.ServiceDesc for HealthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Health_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "nina.Health",
-	HandlerType: (*HealthServer)(nil),
+var HealthService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nina.HealthService",
+	HandlerType: (*HealthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Get",
-			Handler:    _Health_Get_Handler,
+			Handler:    _HealthService_Get_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
