@@ -22,7 +22,7 @@ message GetGithubContributionResponse {
   repeated Contribution contributions = 1;
 }
 message PostGithubContributionRequest {
-  Contribution contribution = 1;
+  repeated Contribution contribution = 1;
 }
 message DeleteGithubContributionRequest {
   string startAt = 1;
