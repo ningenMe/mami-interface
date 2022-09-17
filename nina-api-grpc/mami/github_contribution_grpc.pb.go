@@ -26,6 +26,7 @@ type GithubContributionServiceClient interface {
 	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGithubContributionResponse, error)
 	Post(ctx context.Context, opts ...grpc.CallOption) (GithubContributionService_PostClient, error)
 	Delete(ctx context.Context, in *DeleteGithubContributionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetSummary(ctx context.Context, in *GetGithubContributionSummaryRequest, opts ...grpc.CallOption) (*GetGithubContributionSummaryResponse, error)
 }
 
 type githubContributionServiceClient struct {
@@ -88,6 +89,15 @@ func (c *githubContributionServiceClient) Delete(ctx context.Context, in *Delete
 	return out, nil
 }
 
+func (c *githubContributionServiceClient) GetSummary(ctx context.Context, in *GetGithubContributionSummaryRequest, opts ...grpc.CallOption) (*GetGithubContributionSummaryResponse, error) {
+	out := new(GetGithubContributionSummaryResponse)
+	err := c.cc.Invoke(ctx, "/nina.GithubContributionService/GetSummary", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GithubContributionServiceServer is the server API for GithubContributionService service.
 // All implementations must embed UnimplementedGithubContributionServiceServer
 // for forward compatibility
@@ -95,6 +105,7 @@ type GithubContributionServiceServer interface {
 	Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error)
 	Post(GithubContributionService_PostServer) error
 	Delete(context.Context, *DeleteGithubContributionRequest) (*emptypb.Empty, error)
+	GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error)
 	mustEmbedUnimplementedGithubContributionServiceServer()
 }
 
@@ -110,6 +121,9 @@ func (UnimplementedGithubContributionServiceServer) Post(GithubContributionServi
 }
 func (UnimplementedGithubContributionServiceServer) Delete(context.Context, *DeleteGithubContributionRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedGithubContributionServiceServer) GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSummary not implemented")
 }
 func (UnimplementedGithubContributionServiceServer) mustEmbedUnimplementedGithubContributionServiceServer() {
 }
@@ -187,6 +201,24 @@ func _GithubContributionService_Delete_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GithubContributionService_GetSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGithubContributionSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GithubContributionServiceServer).GetSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nina.GithubContributionService/GetSummary",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GithubContributionServiceServer).GetSummary(ctx, req.(*GetGithubContributionSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GithubContributionService_ServiceDesc is the grpc.ServiceDesc for GithubContributionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -201,6 +233,10 @@ var GithubContributionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _GithubContributionService_Delete_Handler,
+		},
+		{
+			MethodName: "GetSummary",
+			Handler:    _GithubContributionService_GetSummary_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
