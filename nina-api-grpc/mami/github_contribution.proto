@@ -21,7 +21,7 @@ message Contribution {
 }
 message ContributionSummary {
   string date = 1;
-  string count = 2;
+  int32 count = 2;
 }
 message GetGithubContributionResponse {
   repeated Contribution contributions = 1;
