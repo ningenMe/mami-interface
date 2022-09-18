@@ -1,4 +1,4 @@
-// source: github_contribution.proto
+// source: nina-api-grpc/github_contribution.proto
 /**
  * @fileoverview
  * @enhanceable

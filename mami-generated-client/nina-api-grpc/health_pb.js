@@ -1,4 +1,4 @@
-// source: health.proto
+// source: nina-api-grpc/health.proto
 /**
  * @fileoverview
  * @enhanceable
