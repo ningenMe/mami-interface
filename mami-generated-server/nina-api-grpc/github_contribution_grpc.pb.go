@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.20.1
-// source: github_contribution.proto
+// source: nina-api-grpc/github_contribution.proto
 
 package mami_generated_server
 
@@ -246,5 +246,5 @@ var GithubContributionService_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "github_contribution.proto",
+	Metadata: "nina-api-grpc/github_contribution.proto",
 }

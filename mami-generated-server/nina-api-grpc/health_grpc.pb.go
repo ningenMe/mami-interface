@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.20.1
-// source: health.proto
+// source: nina-api-grpc/health.proto
 
-package mami
+package mami_generated_server
 
 import (
 	context "context"
@@ -102,5 +102,5 @@ var HealthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "health.proto",
+	Metadata: "nina-api-grpc/health.proto",
 }

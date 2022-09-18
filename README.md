@@ -1,6 +1,13 @@
 # mami-interface
 
 ```shell
+protoc \
+--go_out=./mami-generated-server --go_opt=paths=source_relative \
+--go-grpc_out=./mami-generated-server --go-grpc_opt=paths=source_relative \
+./nina-api-grpc/*.proto
+```
+
+```shell
 TS_GEN_PATH="./node_modules/.bin/protoc-gen-ts"
 TS_OUT_PATH="./mami-generated-client"
 protoc \

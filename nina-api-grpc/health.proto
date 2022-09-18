@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami";
+option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami-generated-server";
 package nina;
 
 service HealthService {
