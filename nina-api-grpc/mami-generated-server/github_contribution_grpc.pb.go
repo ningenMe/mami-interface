@@ -4,7 +4,7 @@
 // - protoc             v3.20.1
 // source: github_contribution.proto
 
-package mami
+package mami_generated_server
 
 import (
 	context "context"
