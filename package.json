@@ -1,4 +1,6 @@
 {
+  "name": "mami-interface",
+  "version": "0.1.0",
   "dependencies": {
     "ts-protoc-gen": "^0.15.0"
   }
