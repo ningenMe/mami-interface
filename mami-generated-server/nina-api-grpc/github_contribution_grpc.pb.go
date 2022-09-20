@@ -4,7 +4,7 @@
 // - protoc             v3.20.1
 // source: nina-api-grpc/github_contribution.proto
 
-package mami_generated_server
+package nina_api_grpc
 
 import (
 	context "context"

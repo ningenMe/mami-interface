@@ -2,8 +2,9 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami-generated-server";
 package nina;
+
+option go_package = "github.com/ningenme/mami-interface/mami-generated-server/nina-api-grpc";
 
 service HealthService {
   rpc Get (google.protobuf.Empty) returns (GetHealthResponse) {}

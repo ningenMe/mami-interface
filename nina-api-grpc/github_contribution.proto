@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 
 package nina;
 
-option go_package = "github.com/ningenme/mami-interface/nina-api-grpc/mami-generated-server";
+option go_package = "github.com/ningenme/mami-interface/mami-generated-server/nina-api-grpc";
 
 service GithubContributionService {
   rpc Get (google.protobuf.Empty) returns (GetGithubContributionResponse) {}
