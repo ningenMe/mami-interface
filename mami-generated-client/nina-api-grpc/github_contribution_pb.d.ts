@@ -37,28 +37,6 @@ export namespace Contribution {
   }
 }
 
-export class ContributionSummary extends jspb.Message {
-  getDate(): string;
-  setDate(value: string): ContributionSummary;
-
-  getCount(): number;
-  setCount(value: number): ContributionSummary;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ContributionSummary.AsObject;
-  static toObject(includeInstance: boolean, msg: ContributionSummary): ContributionSummary.AsObject;
-  static serializeBinaryToWriter(message: ContributionSummary, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ContributionSummary;
-  static deserializeBinaryFromReader(message: ContributionSummary, reader: jspb.BinaryReader): ContributionSummary;
-}
-
-export namespace ContributionSummary {
-  export type AsObject = {
-    date: string,
-    count: number,
-  }
-}
-
 export class GetGithubContributionResponse extends jspb.Message {
   getContributionsList(): Array<Contribution>;
   setContributionsList(value: Array<Contribution>): GetGithubContributionResponse;
@@ -121,6 +99,124 @@ export namespace DeleteGithubContributionRequest {
   }
 }
 
+export class ContributionSum extends jspb.Message {
+  getDate(): string;
+  setDate(value: string): ContributionSum;
+
+  getSum(): number;
+  setSum(value: number): ContributionSum;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContributionSum.AsObject;
+  static toObject(includeInstance: boolean, msg: ContributionSum): ContributionSum.AsObject;
+  static serializeBinaryToWriter(message: ContributionSum, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContributionSum;
+  static deserializeBinaryFromReader(message: ContributionSum, reader: jspb.BinaryReader): ContributionSum;
+}
+
+export namespace ContributionSum {
+  export type AsObject = {
+    date: string,
+    sum: number,
+  }
+}
+
+export class ContributionStatistics extends jspb.Message {
+  getContributiontype(): ContributionType;
+  setContributiontype(value: ContributionType): ContributionStatistics;
+
+  getSum(): string;
+  setSum(value: string): ContributionStatistics;
+
+  getContributionsumlistList(): Array<ContributionSum>;
+  setContributionsumlistList(value: Array<ContributionSum>): ContributionStatistics;
+  clearContributionsumlistList(): ContributionStatistics;
+  addContributionsumlist(value?: ContributionSum, index?: number): ContributionSum;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContributionStatistics.AsObject;
+  static toObject(includeInstance: boolean, msg: ContributionStatistics): ContributionStatistics.AsObject;
+  static serializeBinaryToWriter(message: ContributionStatistics, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContributionStatistics;
+  static deserializeBinaryFromReader(message: ContributionStatistics, reader: jspb.BinaryReader): ContributionStatistics;
+}
+
+export namespace ContributionStatistics {
+  export type AsObject = {
+    contributiontype: ContributionType,
+    sum: string,
+    contributionsumlistList: Array<ContributionSum.AsObject>,
+  }
+}
+
+export class GetStatisticsRequest extends jspb.Message {
+  getUser(): string;
+  setUser(value: string): GetStatisticsRequest;
+
+  getStartdate(): string;
+  setStartdate(value: string): GetStatisticsRequest;
+
+  getEnddate(): string;
+  setEnddate(value: string): GetStatisticsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetStatisticsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetStatisticsRequest): GetStatisticsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetStatisticsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetStatisticsRequest;
+  static deserializeBinaryFromReader(message: GetStatisticsRequest, reader: jspb.BinaryReader): GetStatisticsRequest;
+}
+
+export namespace GetStatisticsRequest {
+  export type AsObject = {
+    user: string,
+    startdate: string,
+    enddate: string,
+  }
+}
+
+export class GetStatisticsResponse extends jspb.Message {
+  getContributionstatisticslistList(): Array<ContributionStatistics>;
+  setContributionstatisticslistList(value: Array<ContributionStatistics>): GetStatisticsResponse;
+  clearContributionstatisticslistList(): GetStatisticsResponse;
+  addContributionstatisticslist(value?: ContributionStatistics, index?: number): ContributionStatistics;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetStatisticsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetStatisticsResponse): GetStatisticsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetStatisticsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetStatisticsResponse;
+  static deserializeBinaryFromReader(message: GetStatisticsResponse, reader: jspb.BinaryReader): GetStatisticsResponse;
+}
+
+export namespace GetStatisticsResponse {
+  export type AsObject = {
+    contributionstatisticslistList: Array<ContributionStatistics.AsObject>,
+  }
+}
+
+export class ContributionSummary extends jspb.Message {
+  getDate(): string;
+  setDate(value: string): ContributionSummary;
+
+  getCount(): number;
+  setCount(value: number): ContributionSummary;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContributionSummary.AsObject;
+  static toObject(includeInstance: boolean, msg: ContributionSummary): ContributionSummary.AsObject;
+  static serializeBinaryToWriter(message: ContributionSummary, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContributionSummary;
+  static deserializeBinaryFromReader(message: ContributionSummary, reader: jspb.BinaryReader): ContributionSummary;
+}
+
+export namespace ContributionSummary {
+  export type AsObject = {
+    date: string,
+    count: number,
+  }
+}
+
 export class GetGithubContributionSummaryRequest extends jspb.Message {
   getUser(): string;
   setUser(value: string): GetGithubContributionSummaryRequest;
@@ -171,3 +267,9 @@ export namespace GetGithubContributionSummaryResponse {
   }
 }
 
+export enum ContributionType { 
+  UNKNOWN = 0,
+  CREATED_PULL_REQUEST = 1,
+  COMMENTED = 2,
+  APPROVED = 3,
+}

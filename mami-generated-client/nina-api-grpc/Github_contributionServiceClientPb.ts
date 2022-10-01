@@ -165,5 +165,48 @@ export class GithubContributionServiceClient {
     this.methodDescriptorGetSummary);
   }
 
+  methodDescriptorGetStatistics = new grpcWeb.MethodDescriptor(
+    '/nina.GithubContributionService/GetStatistics',
+    grpcWeb.MethodType.UNARY,
+    nina$api$grpc_github_contribution_pb.GetStatisticsRequest,
+    nina$api$grpc_github_contribution_pb.GetStatisticsResponse,
+    (request: nina$api$grpc_github_contribution_pb.GetStatisticsRequest) => {
+      return request.serializeBinary();
+    },
+    nina$api$grpc_github_contribution_pb.GetStatisticsResponse.deserializeBinary
+  );
+
+  getStatistics(
+    request: nina$api$grpc_github_contribution_pb.GetStatisticsRequest,
+    metadata: grpcWeb.Metadata | null): Promise<nina$api$grpc_github_contribution_pb.GetStatisticsResponse>;
+
+  getStatistics(
+    request: nina$api$grpc_github_contribution_pb.GetStatisticsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: nina$api$grpc_github_contribution_pb.GetStatisticsResponse) => void): grpcWeb.ClientReadableStream<nina$api$grpc_github_contribution_pb.GetStatisticsResponse>;
+
+  getStatistics(
+    request: nina$api$grpc_github_contribution_pb.GetStatisticsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: nina$api$grpc_github_contribution_pb.GetStatisticsResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/nina.GithubContributionService/GetStatistics',
+        request,
+        metadata || {},
+        this.methodDescriptorGetStatistics,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/nina.GithubContributionService/GetStatistics',
+    request,
+    metadata || {},
+    this.methodDescriptorGetStatistics);
+  }
+
 }
 

@@ -27,6 +27,7 @@ type GithubContributionServiceClient interface {
 	Post(ctx context.Context, opts ...grpc.CallOption) (GithubContributionService_PostClient, error)
 	Delete(ctx context.Context, in *DeleteGithubContributionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetSummary(ctx context.Context, in *GetGithubContributionSummaryRequest, opts ...grpc.CallOption) (*GetGithubContributionSummaryResponse, error)
+	GetStatistics(ctx context.Context, in *GetStatisticsRequest, opts ...grpc.CallOption) (*GetStatisticsResponse, error)
 }
 
 type githubContributionServiceClient struct {
@@ -98,6 +99,15 @@ func (c *githubContributionServiceClient) GetSummary(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *githubContributionServiceClient) GetStatistics(ctx context.Context, in *GetStatisticsRequest, opts ...grpc.CallOption) (*GetStatisticsResponse, error) {
+	out := new(GetStatisticsResponse)
+	err := c.cc.Invoke(ctx, "/nina.GithubContributionService/GetStatistics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GithubContributionServiceServer is the server API for GithubContributionService service.
 // All implementations must embed UnimplementedGithubContributionServiceServer
 // for forward compatibility
@@ -106,6 +116,7 @@ type GithubContributionServiceServer interface {
 	Post(GithubContributionService_PostServer) error
 	Delete(context.Context, *DeleteGithubContributionRequest) (*emptypb.Empty, error)
 	GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error)
+	GetStatistics(context.Context, *GetStatisticsRequest) (*GetStatisticsResponse, error)
 	mustEmbedUnimplementedGithubContributionServiceServer()
 }
 
@@ -124,6 +135,9 @@ func (UnimplementedGithubContributionServiceServer) Delete(context.Context, *Del
 }
 func (UnimplementedGithubContributionServiceServer) GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSummary not implemented")
+}
+func (UnimplementedGithubContributionServiceServer) GetStatistics(context.Context, *GetStatisticsRequest) (*GetStatisticsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStatistics not implemented")
 }
 func (UnimplementedGithubContributionServiceServer) mustEmbedUnimplementedGithubContributionServiceServer() {
 }
@@ -219,6 +233,24 @@ func _GithubContributionService_GetSummary_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GithubContributionService_GetStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStatisticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GithubContributionServiceServer).GetStatistics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nina.GithubContributionService/GetStatistics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GithubContributionServiceServer).GetStatistics(ctx, req.(*GetStatisticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GithubContributionService_ServiceDesc is the grpc.ServiceDesc for GithubContributionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -237,6 +269,10 @@ var GithubContributionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSummary",
 			Handler:    _GithubContributionService_GetSummary_Handler,
+		},
+		{
+			MethodName: "GetStatistics",
+			Handler:    _GithubContributionService_GetStatistics_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

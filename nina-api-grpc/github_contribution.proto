@@ -11,6 +11,7 @@ service GithubContributionService {
   rpc Post (stream PostGithubContributionRequest) returns (google.protobuf.Empty) {}
   rpc Delete (DeleteGithubContributionRequest) returns (google.protobuf.Empty) {}
   rpc GetSummary (GetGithubContributionSummaryRequest) returns (GetGithubContributionSummaryResponse) {}
+  rpc GetStatistics (GetStatisticsRequest) returns (GetStatisticsResponse) {}
 }
 message Contribution {
   string contributedAt = 1;
@@ -18,10 +19,6 @@ message Contribution {
   string repository = 3;
   string user = 4;
   string status = 5;
-}
-message ContributionSummary {
-  string date = 1;
-  int32 count = 2;
 }
 message GetGithubContributionResponse {
   repeated Contribution contributions = 1;
@@ -33,6 +30,35 @@ message DeleteGithubContributionRequest {
   string startAt = 1;
   string endAt = 2;
 }
+message ContributionSum {
+  string date = 1;
+  int32 sum = 2;
+}
+enum ContributionType {
+  UNKNOWN = 0;
+  CREATED_PULL_REQUEST = 1;
+  COMMENTED = 2;
+  APPROVED = 3;
+}
+message ContributionStatistics {
+  ContributionType contributionType = 1;
+  string sum = 2;
+  repeated ContributionSum contributionSumList = 3;
+}
+message GetStatisticsRequest {
+  string user = 1;
+  string startDate = 2;
+  string endDate = 3;
+}
+message GetStatisticsResponse {
+  repeated ContributionStatistics contributionStatisticsList = 1;
+}
+
+//TODO 消す
+message ContributionSummary {
+  string date = 1;
+  int32 count = 2;
+}
 message GetGithubContributionSummaryRequest {
   string user = 1;
 }
@@ -41,4 +67,3 @@ message GetGithubContributionSummaryResponse {
   repeated ContributionSummary commentedSummaries = 2;
   repeated ContributionSummary approvedSummaries = 3;
 }
-
