@@ -122,11 +122,8 @@ export namespace ContributionSum {
 }
 
 export class ContributionStatistics extends jspb.Message {
-  getContributiontype(): ContributionType;
-  setContributiontype(value: ContributionType): ContributionStatistics;
-
-  getSum(): string;
-  setSum(value: string): ContributionStatistics;
+  getSum(): number;
+  setSum(value: number): ContributionStatistics;
 
   getContributionsumlistList(): Array<ContributionSum>;
   setContributionsumlistList(value: Array<ContributionSum>): ContributionStatistics;
@@ -143,8 +140,7 @@ export class ContributionStatistics extends jspb.Message {
 
 export namespace ContributionStatistics {
   export type AsObject = {
-    contributiontype: ContributionType,
-    sum: string,
+    sum: number,
     contributionsumlistList: Array<ContributionSum.AsObject>,
   }
 }
@@ -152,12 +148,6 @@ export namespace ContributionStatistics {
 export class GetStatisticsRequest extends jspb.Message {
   getUser(): string;
   setUser(value: string): GetStatisticsRequest;
-
-  getStartdate(): string;
-  setStartdate(value: string): GetStatisticsRequest;
-
-  getEnddate(): string;
-  setEnddate(value: string): GetStatisticsRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetStatisticsRequest.AsObject;
@@ -170,16 +160,24 @@ export class GetStatisticsRequest extends jspb.Message {
 export namespace GetStatisticsRequest {
   export type AsObject = {
     user: string,
-    startdate: string,
-    enddate: string,
   }
 }
 
 export class GetStatisticsResponse extends jspb.Message {
-  getContributionstatisticslistList(): Array<ContributionStatistics>;
-  setContributionstatisticslistList(value: Array<ContributionStatistics>): GetStatisticsResponse;
-  clearContributionstatisticslistList(): GetStatisticsResponse;
-  addContributionstatisticslist(value?: ContributionStatistics, index?: number): ContributionStatistics;
+  getCreatedpullrequeststatistics(): ContributionStatistics | undefined;
+  setCreatedpullrequeststatistics(value?: ContributionStatistics): GetStatisticsResponse;
+  hasCreatedpullrequeststatistics(): boolean;
+  clearCreatedpullrequeststatistics(): GetStatisticsResponse;
+
+  getCommentedstatistics(): ContributionStatistics | undefined;
+  setCommentedstatistics(value?: ContributionStatistics): GetStatisticsResponse;
+  hasCommentedstatistics(): boolean;
+  clearCommentedstatistics(): GetStatisticsResponse;
+
+  getApprovedstatistics(): ContributionStatistics | undefined;
+  setApprovedstatistics(value?: ContributionStatistics): GetStatisticsResponse;
+  hasApprovedstatistics(): boolean;
+  clearApprovedstatistics(): GetStatisticsResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GetStatisticsResponse.AsObject;
@@ -191,7 +189,9 @@ export class GetStatisticsResponse extends jspb.Message {
 
 export namespace GetStatisticsResponse {
   export type AsObject = {
-    contributionstatisticslistList: Array<ContributionStatistics.AsObject>,
+    createdpullrequeststatistics?: ContributionStatistics.AsObject,
+    commentedstatistics?: ContributionStatistics.AsObject,
+    approvedstatistics?: ContributionStatistics.AsObject,
   }
 }
 
@@ -267,9 +267,3 @@ export namespace GetGithubContributionSummaryResponse {
   }
 }
 
-export enum ContributionType { 
-  UNKNOWN = 0,
-  CREATED_PULL_REQUEST = 1,
-  COMMENTED = 2,
-  APPROVED = 3,
-}

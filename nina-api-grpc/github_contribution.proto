@@ -34,24 +34,17 @@ message ContributionSum {
   string date = 1;
   int32 sum = 2;
 }
-enum ContributionType {
-  UNKNOWN = 0;
-  CREATED_PULL_REQUEST = 1;
-  COMMENTED = 2;
-  APPROVED = 3;
-}
 message ContributionStatistics {
-  ContributionType contributionType = 1;
-  string sum = 2;
-  repeated ContributionSum contributionSumList = 3;
+  int32 sum = 1;
+  repeated ContributionSum contributionSumList = 2;
 }
 message GetStatisticsRequest {
   string user = 1;
-  string startDate = 2;
-  string endDate = 3;
 }
 message GetStatisticsResponse {
-  repeated ContributionStatistics contributionStatisticsList = 1;
+  ContributionStatistics createdPullRequestStatistics = 1;
+  ContributionStatistics commentedStatistics = 2;
+  ContributionStatistics approvedStatistics = 3;
 }
 
 //TODO 消す

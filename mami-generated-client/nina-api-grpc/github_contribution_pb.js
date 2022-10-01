@@ -21,7 +21,6 @@ goog.exportSymbol('proto.nina.Contribution', null, global);
 goog.exportSymbol('proto.nina.ContributionStatistics', null, global);
 goog.exportSymbol('proto.nina.ContributionSum', null, global);
 goog.exportSymbol('proto.nina.ContributionSummary', null, global);
-goog.exportSymbol('proto.nina.ContributionType', null, global);
 goog.exportSymbol('proto.nina.DeleteGithubContributionRequest', null, global);
 goog.exportSymbol('proto.nina.GetGithubContributionResponse', null, global);
 goog.exportSymbol('proto.nina.GetGithubContributionSummaryRequest', null, global);
@@ -187,7 +186,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.nina.GetStatisticsResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.nina.GetStatisticsResponse.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.nina.GetStatisticsResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -1156,7 +1155,7 @@ proto.nina.ContributionSum.prototype.setSum = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.nina.ContributionStatistics.repeatedFields_ = [3];
+proto.nina.ContributionStatistics.repeatedFields_ = [2];
 
 
 
@@ -1189,8 +1188,7 @@ proto.nina.ContributionStatistics.prototype.toObject = function(opt_includeInsta
  */
 proto.nina.ContributionStatistics.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contributiontype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sum: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    sum: jspb.Message.getFieldWithDefault(msg, 1, 0),
     contributionsumlistList: jspb.Message.toObjectList(msg.getContributionsumlistList(),
     proto.nina.ContributionSum.toObject, includeInstance)
   };
@@ -1230,14 +1228,10 @@ proto.nina.ContributionStatistics.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.nina.ContributionType} */ (reader.readEnum());
-      msg.setContributiontype(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setSum(value);
       break;
-    case 3:
+    case 2:
       var value = new proto.nina.ContributionSum;
       reader.readMessage(value,proto.nina.ContributionSum.deserializeBinaryFromReader);
       msg.addContributionsumlist(value);
@@ -1271,24 +1265,17 @@ proto.nina.ContributionStatistics.prototype.serializeBinary = function() {
  */
 proto.nina.ContributionStatistics.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getContributiontype();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      1,
-      f
-    );
-  }
   f = message.getSum();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
       f
     );
   }
   f = message.getContributionsumlistList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      2,
       f,
       proto.nina.ContributionSum.serializeBinaryToWriter
     );
@@ -1297,48 +1284,30 @@ proto.nina.ContributionStatistics.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional ContributionType contributionType = 1;
- * @return {!proto.nina.ContributionType}
- */
-proto.nina.ContributionStatistics.prototype.getContributiontype = function() {
-  return /** @type {!proto.nina.ContributionType} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/**
- * @param {!proto.nina.ContributionType} value
- * @return {!proto.nina.ContributionStatistics} returns this
- */
-proto.nina.ContributionStatistics.prototype.setContributiontype = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
-};
-
-
-/**
- * optional string sum = 2;
- * @return {string}
+ * optional int32 sum = 1;
+ * @return {number}
  */
 proto.nina.ContributionStatistics.prototype.getSum = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.nina.ContributionStatistics} returns this
  */
 proto.nina.ContributionStatistics.prototype.setSum = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * repeated ContributionSum contributionSumList = 3;
+ * repeated ContributionSum contributionSumList = 2;
  * @return {!Array<!proto.nina.ContributionSum>}
  */
 proto.nina.ContributionStatistics.prototype.getContributionsumlistList = function() {
   return /** @type{!Array<!proto.nina.ContributionSum>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.nina.ContributionSum, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.nina.ContributionSum, 2));
 };
 
 
@@ -1347,7 +1316,7 @@ proto.nina.ContributionStatistics.prototype.getContributionsumlistList = functio
  * @return {!proto.nina.ContributionStatistics} returns this
 */
 proto.nina.ContributionStatistics.prototype.setContributionsumlistList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -1357,7 +1326,7 @@ proto.nina.ContributionStatistics.prototype.setContributionsumlistList = functio
  * @return {!proto.nina.ContributionSum}
  */
 proto.nina.ContributionStatistics.prototype.addContributionsumlist = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.nina.ContributionSum, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.nina.ContributionSum, opt_index);
 };
 
 
@@ -1402,9 +1371,7 @@ proto.nina.GetStatisticsRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.nina.GetStatisticsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    user: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    startdate: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    enddate: jspb.Message.getFieldWithDefault(msg, 3, "")
+    user: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1445,14 +1412,6 @@ proto.nina.GetStatisticsRequest.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {string} */ (reader.readString());
       msg.setUser(value);
       break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setStartdate(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setEnddate(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -1489,20 +1448,6 @@ proto.nina.GetStatisticsRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getStartdate();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
-  f = message.getEnddate();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
 };
 
 
@@ -1524,49 +1469,6 @@ proto.nina.GetStatisticsRequest.prototype.setUser = function(value) {
 };
 
 
-/**
- * optional string startDate = 2;
- * @return {string}
- */
-proto.nina.GetStatisticsRequest.prototype.getStartdate = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.nina.GetStatisticsRequest} returns this
- */
-proto.nina.GetStatisticsRequest.prototype.setStartdate = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string endDate = 3;
- * @return {string}
- */
-proto.nina.GetStatisticsRequest.prototype.getEnddate = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.nina.GetStatisticsRequest} returns this
- */
-proto.nina.GetStatisticsRequest.prototype.setEnddate = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.nina.GetStatisticsResponse.repeatedFields_ = [1];
 
 
 
@@ -1599,8 +1501,9 @@ proto.nina.GetStatisticsResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.nina.GetStatisticsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contributionstatisticslistList: jspb.Message.toObjectList(msg.getContributionstatisticslistList(),
-    proto.nina.ContributionStatistics.toObject, includeInstance)
+    createdpullrequeststatistics: (f = msg.getCreatedpullrequeststatistics()) && proto.nina.ContributionStatistics.toObject(includeInstance, f),
+    commentedstatistics: (f = msg.getCommentedstatistics()) && proto.nina.ContributionStatistics.toObject(includeInstance, f),
+    approvedstatistics: (f = msg.getApprovedstatistics()) && proto.nina.ContributionStatistics.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1640,7 +1543,17 @@ proto.nina.GetStatisticsResponse.deserializeBinaryFromReader = function(msg, rea
     case 1:
       var value = new proto.nina.ContributionStatistics;
       reader.readMessage(value,proto.nina.ContributionStatistics.deserializeBinaryFromReader);
-      msg.addContributionstatisticslist(value);
+      msg.setCreatedpullrequeststatistics(value);
+      break;
+    case 2:
+      var value = new proto.nina.ContributionStatistics;
+      reader.readMessage(value,proto.nina.ContributionStatistics.deserializeBinaryFromReader);
+      msg.setCommentedstatistics(value);
+      break;
+    case 3:
+      var value = new proto.nina.ContributionStatistics;
+      reader.readMessage(value,proto.nina.ContributionStatistics.deserializeBinaryFromReader);
+      msg.setApprovedstatistics(value);
       break;
     default:
       reader.skipField();
@@ -1671,10 +1584,26 @@ proto.nina.GetStatisticsResponse.prototype.serializeBinary = function() {
  */
 proto.nina.GetStatisticsResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getContributionstatisticslistList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getCreatedpullrequeststatistics();
+  if (f != null) {
+    writer.writeMessage(
       1,
+      f,
+      proto.nina.ContributionStatistics.serializeBinaryToWriter
+    );
+  }
+  f = message.getCommentedstatistics();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.nina.ContributionStatistics.serializeBinaryToWriter
+    );
+  }
+  f = message.getApprovedstatistics();
+  if (f != null) {
+    writer.writeMessage(
+      3,
       f,
       proto.nina.ContributionStatistics.serializeBinaryToWriter
     );
@@ -1683,40 +1612,113 @@ proto.nina.GetStatisticsResponse.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * repeated ContributionStatistics contributionStatisticsList = 1;
- * @return {!Array<!proto.nina.ContributionStatistics>}
+ * optional ContributionStatistics createdPullRequestStatistics = 1;
+ * @return {?proto.nina.ContributionStatistics}
  */
-proto.nina.GetStatisticsResponse.prototype.getContributionstatisticslistList = function() {
-  return /** @type{!Array<!proto.nina.ContributionStatistics>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.nina.ContributionStatistics, 1));
+proto.nina.GetStatisticsResponse.prototype.getCreatedpullrequeststatistics = function() {
+  return /** @type{?proto.nina.ContributionStatistics} */ (
+    jspb.Message.getWrapperField(this, proto.nina.ContributionStatistics, 1));
 };
 
 
 /**
- * @param {!Array<!proto.nina.ContributionStatistics>} value
+ * @param {?proto.nina.ContributionStatistics|undefined} value
  * @return {!proto.nina.GetStatisticsResponse} returns this
 */
-proto.nina.GetStatisticsResponse.prototype.setContributionstatisticslistList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+proto.nina.GetStatisticsResponse.prototype.setCreatedpullrequeststatistics = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.nina.ContributionStatistics=} opt_value
- * @param {number=} opt_index
- * @return {!proto.nina.ContributionStatistics}
- */
-proto.nina.GetStatisticsResponse.prototype.addContributionstatisticslist = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.nina.ContributionStatistics, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
+ * Clears the message field making it undefined.
  * @return {!proto.nina.GetStatisticsResponse} returns this
  */
-proto.nina.GetStatisticsResponse.prototype.clearContributionstatisticslistList = function() {
-  return this.setContributionstatisticslistList([]);
+proto.nina.GetStatisticsResponse.prototype.clearCreatedpullrequeststatistics = function() {
+  return this.setCreatedpullrequeststatistics(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.nina.GetStatisticsResponse.prototype.hasCreatedpullrequeststatistics = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional ContributionStatistics commentedStatistics = 2;
+ * @return {?proto.nina.ContributionStatistics}
+ */
+proto.nina.GetStatisticsResponse.prototype.getCommentedstatistics = function() {
+  return /** @type{?proto.nina.ContributionStatistics} */ (
+    jspb.Message.getWrapperField(this, proto.nina.ContributionStatistics, 2));
+};
+
+
+/**
+ * @param {?proto.nina.ContributionStatistics|undefined} value
+ * @return {!proto.nina.GetStatisticsResponse} returns this
+*/
+proto.nina.GetStatisticsResponse.prototype.setCommentedstatistics = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.nina.GetStatisticsResponse} returns this
+ */
+proto.nina.GetStatisticsResponse.prototype.clearCommentedstatistics = function() {
+  return this.setCommentedstatistics(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.nina.GetStatisticsResponse.prototype.hasCommentedstatistics = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional ContributionStatistics approvedStatistics = 3;
+ * @return {?proto.nina.ContributionStatistics}
+ */
+proto.nina.GetStatisticsResponse.prototype.getApprovedstatistics = function() {
+  return /** @type{?proto.nina.ContributionStatistics} */ (
+    jspb.Message.getWrapperField(this, proto.nina.ContributionStatistics, 3));
+};
+
+
+/**
+ * @param {?proto.nina.ContributionStatistics|undefined} value
+ * @return {!proto.nina.GetStatisticsResponse} returns this
+*/
+proto.nina.GetStatisticsResponse.prototype.setApprovedstatistics = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.nina.GetStatisticsResponse} returns this
+ */
+proto.nina.GetStatisticsResponse.prototype.clearApprovedstatistics = function() {
+  return this.setApprovedstatistics(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.nina.GetStatisticsResponse.prototype.hasApprovedstatistics = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -2275,15 +2277,5 @@ proto.nina.GetGithubContributionSummaryResponse.prototype.clearApprovedsummaries
   return this.setApprovedsummariesList([]);
 };
 
-
-/**
- * @enum {number}
- */
-proto.nina.ContributionType = {
-  UNKNOWN: 0,
-  CREATED_PULL_REQUEST: 1,
-  COMMENTED: 2,
-  APPROVED: 3
-};
 
 goog.object.extend(exports, proto.nina);
