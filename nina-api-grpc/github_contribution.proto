@@ -10,7 +10,6 @@ service GithubContributionService {
   rpc Get (google.protobuf.Empty) returns (GetGithubContributionResponse) {}
   rpc Post (stream PostGithubContributionRequest) returns (google.protobuf.Empty) {}
   rpc Delete (DeleteGithubContributionRequest) returns (google.protobuf.Empty) {}
-  rpc GetSummary (GetGithubContributionSummaryRequest) returns (GetGithubContributionSummaryResponse) {}
   rpc GetStatistics (GetStatisticsRequest) returns (GetStatisticsResponse) {}
 }
 message Contribution {
@@ -45,18 +44,4 @@ message GetStatisticsResponse {
   ContributionStatistics createdPullRequestStatistics = 1;
   ContributionStatistics commentedStatistics = 2;
   ContributionStatistics approvedStatistics = 3;
-}
-
-//TODO 消す
-message ContributionSummary {
-  string date = 1;
-  int32 count = 2;
-}
-message GetGithubContributionSummaryRequest {
-  string user = 1;
-}
-message GetGithubContributionSummaryResponse {
-  repeated ContributionSummary pullRequestSummaries = 1;
-  repeated ContributionSummary commentedSummaries = 2;
-  repeated ContributionSummary approvedSummaries = 3;
 }

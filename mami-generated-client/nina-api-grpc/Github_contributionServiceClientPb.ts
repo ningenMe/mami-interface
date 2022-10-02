@@ -122,49 +122,6 @@ export class GithubContributionServiceClient {
     this.methodDescriptorDelete);
   }
 
-  methodDescriptorGetSummary = new grpcWeb.MethodDescriptor(
-    '/nina.GithubContributionService/GetSummary',
-    grpcWeb.MethodType.UNARY,
-    nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryRequest,
-    nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse,
-    (request: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryRequest) => {
-      return request.serializeBinary();
-    },
-    nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse.deserializeBinary
-  );
-
-  getSummary(
-    request: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryRequest,
-    metadata: grpcWeb.Metadata | null): Promise<nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse>;
-
-  getSummary(
-    request: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse) => void): grpcWeb.ClientReadableStream<nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse>;
-
-  getSummary(
-    request: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_github_contribution_pb.GetGithubContributionSummaryResponse) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/nina.GithubContributionService/GetSummary',
-        request,
-        metadata || {},
-        this.methodDescriptorGetSummary,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/nina.GithubContributionService/GetSummary',
-    request,
-    metadata || {},
-    this.methodDescriptorGetSummary);
-  }
-
   methodDescriptorGetStatistics = new grpcWeb.MethodDescriptor(
     '/nina.GithubContributionService/GetStatistics',
     grpcWeb.MethodType.UNARY,

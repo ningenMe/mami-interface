@@ -26,7 +26,6 @@ type GithubContributionServiceClient interface {
 	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGithubContributionResponse, error)
 	Post(ctx context.Context, opts ...grpc.CallOption) (GithubContributionService_PostClient, error)
 	Delete(ctx context.Context, in *DeleteGithubContributionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetSummary(ctx context.Context, in *GetGithubContributionSummaryRequest, opts ...grpc.CallOption) (*GetGithubContributionSummaryResponse, error)
 	GetStatistics(ctx context.Context, in *GetStatisticsRequest, opts ...grpc.CallOption) (*GetStatisticsResponse, error)
 }
 
@@ -90,15 +89,6 @@ func (c *githubContributionServiceClient) Delete(ctx context.Context, in *Delete
 	return out, nil
 }
 
-func (c *githubContributionServiceClient) GetSummary(ctx context.Context, in *GetGithubContributionSummaryRequest, opts ...grpc.CallOption) (*GetGithubContributionSummaryResponse, error) {
-	out := new(GetGithubContributionSummaryResponse)
-	err := c.cc.Invoke(ctx, "/nina.GithubContributionService/GetSummary", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *githubContributionServiceClient) GetStatistics(ctx context.Context, in *GetStatisticsRequest, opts ...grpc.CallOption) (*GetStatisticsResponse, error) {
 	out := new(GetStatisticsResponse)
 	err := c.cc.Invoke(ctx, "/nina.GithubContributionService/GetStatistics", in, out, opts...)
@@ -115,7 +105,6 @@ type GithubContributionServiceServer interface {
 	Get(context.Context, *emptypb.Empty) (*GetGithubContributionResponse, error)
 	Post(GithubContributionService_PostServer) error
 	Delete(context.Context, *DeleteGithubContributionRequest) (*emptypb.Empty, error)
-	GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error)
 	GetStatistics(context.Context, *GetStatisticsRequest) (*GetStatisticsResponse, error)
 	mustEmbedUnimplementedGithubContributionServiceServer()
 }
@@ -132,9 +121,6 @@ func (UnimplementedGithubContributionServiceServer) Post(GithubContributionServi
 }
 func (UnimplementedGithubContributionServiceServer) Delete(context.Context, *DeleteGithubContributionRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
-}
-func (UnimplementedGithubContributionServiceServer) GetSummary(context.Context, *GetGithubContributionSummaryRequest) (*GetGithubContributionSummaryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSummary not implemented")
 }
 func (UnimplementedGithubContributionServiceServer) GetStatistics(context.Context, *GetStatisticsRequest) (*GetStatisticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStatistics not implemented")
@@ -215,24 +201,6 @@ func _GithubContributionService_Delete_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GithubContributionService_GetSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetGithubContributionSummaryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GithubContributionServiceServer).GetSummary(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nina.GithubContributionService/GetSummary",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GithubContributionServiceServer).GetSummary(ctx, req.(*GetGithubContributionSummaryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GithubContributionService_GetStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetStatisticsRequest)
 	if err := dec(in); err != nil {
@@ -265,10 +233,6 @@ var GithubContributionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _GithubContributionService_Delete_Handler,
-		},
-		{
-			MethodName: "GetSummary",
-			Handler:    _GithubContributionService_GetSummary_Handler,
 		},
 		{
 			MethodName: "GetStatistics",
