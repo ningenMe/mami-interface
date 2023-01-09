@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package nina;
+
+option go_package = "github.com/ningenme/mami-interface/mami-generated-server/nina-api-grpc";
+
+service ComproCategoryService {
+  rpc Get (google.protobuf.Empty) returns (GetCategoryResponse) {}
+  rpc Post (PostCategoryRequest) returns (google.protobuf.Empty) {}
+}
+message Category {
+  string categoryName = 1;
+  string path = 2;
+  int32 order = 3;
+}
+message GetCategoryResponse {
+  repeated Category categoryList = 1;
+}
+message PostCategoryRequest {
+  string categoryId = 1;
+  Category category = 2;
+}
