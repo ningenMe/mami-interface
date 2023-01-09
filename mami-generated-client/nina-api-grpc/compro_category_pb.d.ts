@@ -4,6 +4,9 @@ import * as google_protobuf_empty_pb from 'google-protobuf/google/protobuf/empty
 
 
 export class Category extends jspb.Message {
+  getCategoryid(): string;
+  setCategoryid(value: string): Category;
+
   getCategorydisplayname(): string;
   setCategorydisplayname(value: string): Category;
 
@@ -23,6 +26,7 @@ export class Category extends jspb.Message {
 
 export namespace Category {
   export type AsObject = {
+    categoryid: string,
     categorydisplayname: string,
     categorysystemname: string,
     categoryorder: number,

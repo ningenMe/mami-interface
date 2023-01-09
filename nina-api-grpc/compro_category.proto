@@ -11,9 +11,10 @@ service ComproCategoryService {
   rpc Post (PostCategoryRequest) returns (google.protobuf.Empty) {}
 }
 message Category {
-  string categoryDisplayName = 1;
-  string categorySystemName = 2;
-  int32 categoryOrder = 3;
+  string categoryId = 1;
+  string categoryDisplayName = 2;
+  string categorySystemName = 3;
+  int32 categoryOrder = 4;
 }
 message GetCategoryResponse {
   repeated Category categoryList = 1;

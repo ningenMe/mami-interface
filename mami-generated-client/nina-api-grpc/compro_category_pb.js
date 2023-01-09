@@ -115,9 +115,10 @@ proto.nina.Category.prototype.toObject = function(opt_includeInstance) {
  */
 proto.nina.Category.toObject = function(includeInstance, msg) {
   var f, obj = {
-    categorydisplayname: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    categorysystemname: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    categoryorder: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    categoryid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    categorydisplayname: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    categorysystemname: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    categoryorder: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -156,13 +157,17 @@ proto.nina.Category.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCategorydisplayname(value);
+      msg.setCategoryid(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCategorysystemname(value);
+      msg.setCategorydisplayname(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCategorysystemname(value);
+      break;
+    case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setCategoryorder(value);
       break;
@@ -195,24 +200,31 @@ proto.nina.Category.prototype.serializeBinary = function() {
  */
 proto.nina.Category.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCategorydisplayname();
+  f = message.getCategoryid();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getCategorysystemname();
+  f = message.getCategorydisplayname();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
+  f = message.getCategorysystemname();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
   f = message.getCategoryorder();
   if (f !== 0) {
     writer.writeInt32(
-      3,
+      4,
       f
     );
   }
@@ -220,10 +232,10 @@ proto.nina.Category.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string categoryDisplayName = 1;
+ * optional string categoryId = 1;
  * @return {string}
  */
-proto.nina.Category.prototype.getCategorydisplayname = function() {
+proto.nina.Category.prototype.getCategoryid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -232,16 +244,16 @@ proto.nina.Category.prototype.getCategorydisplayname = function() {
  * @param {string} value
  * @return {!proto.nina.Category} returns this
  */
-proto.nina.Category.prototype.setCategorydisplayname = function(value) {
+proto.nina.Category.prototype.setCategoryid = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string categorySystemName = 2;
+ * optional string categoryDisplayName = 2;
  * @return {string}
  */
-proto.nina.Category.prototype.getCategorysystemname = function() {
+proto.nina.Category.prototype.getCategorydisplayname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -250,17 +262,35 @@ proto.nina.Category.prototype.getCategorysystemname = function() {
  * @param {string} value
  * @return {!proto.nina.Category} returns this
  */
-proto.nina.Category.prototype.setCategorysystemname = function(value) {
+proto.nina.Category.prototype.setCategorydisplayname = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional int32 categoryOrder = 3;
+ * optional string categorySystemName = 3;
+ * @return {string}
+ */
+proto.nina.Category.prototype.getCategorysystemname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.nina.Category} returns this
+ */
+proto.nina.Category.prototype.setCategorysystemname = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int32 categoryOrder = 4;
  * @return {number}
  */
 proto.nina.Category.prototype.getCategoryorder = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -269,7 +299,7 @@ proto.nina.Category.prototype.getCategoryorder = function() {
  * @return {!proto.nina.Category} returns this
  */
 proto.nina.Category.prototype.setCategoryorder = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
