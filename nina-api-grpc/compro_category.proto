@@ -9,6 +9,9 @@ option go_package = "github.com/ningenme/mami-interface/mami-generated-server/ni
 service ComproCategoryService {
   rpc Get (google.protobuf.Empty) returns (GetCategoryResponse) {}
   rpc Post (PostCategoryRequest) returns (google.protobuf.Empty) {}
+  rpc CategoryGet (google.protobuf.Empty) returns (GetCategoryResponse) {}
+  rpc CategoryPost (PostCategoryRequest) returns (google.protobuf.Empty) {}
+  rpc TopicGet (TopicGetRequest) returns (TopicGetResponse) {}
 }
 message Category {
   string categoryId = 1;
@@ -22,4 +25,35 @@ message GetCategoryResponse {
 message PostCategoryRequest {
   string categoryId = 1;
   Category category = 2;
+}
+message CategoryGetResponse {
+  repeated Category categoryList = 1;
+}
+message CategoryPostRequest {
+  string categoryId = 1;
+  Category category = 2;
+}
+message Topic {
+  string topicId = 1;
+  string topicDisplayName = 2;
+  string topicOrder = 3;
+  repeated Problem problemList = 4;
+}
+message TopicGetRequest {
+  string categoryId = 1;
+}
+message TopicGetResponse {
+  Category category = 1;
+  repeated Topic topicList = 2;
+}
+message Problem {
+  string problemId = 1;
+  string url = 2;
+  string problemDisplayName = 3;
+  int32 estimation = 4;
+  repeated Tag tagList = 5;
+}
+message Tag {
+  string categoryId = 1;
+  string topicDisplayName = 2;
 }
