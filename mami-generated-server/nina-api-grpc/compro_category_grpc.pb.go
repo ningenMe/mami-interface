@@ -23,10 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ComproCategoryServiceClient interface {
-	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCategoryResponse, error)
-	Post(ctx context.Context, in *PostCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	CategoryGet(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCategoryResponse, error)
-	CategoryPost(ctx context.Context, in *PostCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CategoryGet(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoryGetResponse, error)
+	CategoryPost(ctx context.Context, in *CategoryPostRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	TopicGet(ctx context.Context, in *TopicGetRequest, opts ...grpc.CallOption) (*TopicGetResponse, error)
 }
 
@@ -38,26 +36,8 @@ func NewComproCategoryServiceClient(cc grpc.ClientConnInterface) ComproCategoryS
 	return &comproCategoryServiceClient{cc}
 }
 
-func (c *comproCategoryServiceClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCategoryResponse, error) {
-	out := new(GetCategoryResponse)
-	err := c.cc.Invoke(ctx, "/nina.ComproCategoryService/Get", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *comproCategoryServiceClient) Post(ctx context.Context, in *PostCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/nina.ComproCategoryService/Post", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *comproCategoryServiceClient) CategoryGet(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCategoryResponse, error) {
-	out := new(GetCategoryResponse)
+func (c *comproCategoryServiceClient) CategoryGet(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CategoryGetResponse, error) {
+	out := new(CategoryGetResponse)
 	err := c.cc.Invoke(ctx, "/nina.ComproCategoryService/CategoryGet", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -65,7 +45,7 @@ func (c *comproCategoryServiceClient) CategoryGet(ctx context.Context, in *empty
 	return out, nil
 }
 
-func (c *comproCategoryServiceClient) CategoryPost(ctx context.Context, in *PostCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *comproCategoryServiceClient) CategoryPost(ctx context.Context, in *CategoryPostRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/nina.ComproCategoryService/CategoryPost", in, out, opts...)
 	if err != nil {
@@ -87,10 +67,8 @@ func (c *comproCategoryServiceClient) TopicGet(ctx context.Context, in *TopicGet
 // All implementations must embed UnimplementedComproCategoryServiceServer
 // for forward compatibility
 type ComproCategoryServiceServer interface {
-	Get(context.Context, *emptypb.Empty) (*GetCategoryResponse, error)
-	Post(context.Context, *PostCategoryRequest) (*emptypb.Empty, error)
-	CategoryGet(context.Context, *emptypb.Empty) (*GetCategoryResponse, error)
-	CategoryPost(context.Context, *PostCategoryRequest) (*emptypb.Empty, error)
+	CategoryGet(context.Context, *emptypb.Empty) (*CategoryGetResponse, error)
+	CategoryPost(context.Context, *CategoryPostRequest) (*emptypb.Empty, error)
 	TopicGet(context.Context, *TopicGetRequest) (*TopicGetResponse, error)
 	mustEmbedUnimplementedComproCategoryServiceServer()
 }
@@ -99,16 +77,10 @@ type ComproCategoryServiceServer interface {
 type UnimplementedComproCategoryServiceServer struct {
 }
 
-func (UnimplementedComproCategoryServiceServer) Get(context.Context, *emptypb.Empty) (*GetCategoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (UnimplementedComproCategoryServiceServer) Post(context.Context, *PostCategoryRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
-}
-func (UnimplementedComproCategoryServiceServer) CategoryGet(context.Context, *emptypb.Empty) (*GetCategoryResponse, error) {
+func (UnimplementedComproCategoryServiceServer) CategoryGet(context.Context, *emptypb.Empty) (*CategoryGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CategoryGet not implemented")
 }
-func (UnimplementedComproCategoryServiceServer) CategoryPost(context.Context, *PostCategoryRequest) (*emptypb.Empty, error) {
+func (UnimplementedComproCategoryServiceServer) CategoryPost(context.Context, *CategoryPostRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CategoryPost not implemented")
 }
 func (UnimplementedComproCategoryServiceServer) TopicGet(context.Context, *TopicGetRequest) (*TopicGetResponse, error) {
@@ -125,42 +97,6 @@ type UnsafeComproCategoryServiceServer interface {
 
 func RegisterComproCategoryServiceServer(s grpc.ServiceRegistrar, srv ComproCategoryServiceServer) {
 	s.RegisterService(&ComproCategoryService_ServiceDesc, srv)
-}
-
-func _ComproCategoryService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ComproCategoryServiceServer).Get(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nina.ComproCategoryService/Get",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComproCategoryServiceServer).Get(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ComproCategoryService_Post_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCategoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ComproCategoryServiceServer).Post(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nina.ComproCategoryService/Post",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComproCategoryServiceServer).Post(ctx, req.(*PostCategoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ComproCategoryService_CategoryGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -182,7 +118,7 @@ func _ComproCategoryService_CategoryGet_Handler(srv interface{}, ctx context.Con
 }
 
 func _ComproCategoryService_CategoryPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCategoryRequest)
+	in := new(CategoryPostRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -194,7 +130,7 @@ func _ComproCategoryService_CategoryPost_Handler(srv interface{}, ctx context.Co
 		FullMethod: "/nina.ComproCategoryService/CategoryPost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ComproCategoryServiceServer).CategoryPost(ctx, req.(*PostCategoryRequest))
+		return srv.(ComproCategoryServiceServer).CategoryPost(ctx, req.(*CategoryPostRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -224,14 +160,6 @@ var ComproCategoryService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "nina.ComproCategoryService",
 	HandlerType: (*ComproCategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Get",
-			Handler:    _ComproCategoryService_Get_Handler,
-		},
-		{
-			MethodName: "Post",
-			Handler:    _ComproCategoryService_Post_Handler,
-		},
 		{
 			MethodName: "CategoryGet",
 			Handler:    _ComproCategoryService_CategoryGet_Handler,

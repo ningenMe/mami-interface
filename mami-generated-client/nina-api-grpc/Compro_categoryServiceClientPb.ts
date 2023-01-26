@@ -36,118 +36,32 @@ export class ComproCategoryServiceClient {
     this.options_ = options;
   }
 
-  methodDescriptorGet = new grpcWeb.MethodDescriptor(
-    '/nina.ComproCategoryService/Get',
-    grpcWeb.MethodType.UNARY,
-    google_protobuf_empty_pb.Empty,
-    nina$api$grpc_compro_category_pb.GetCategoryResponse,
-    (request: google_protobuf_empty_pb.Empty) => {
-      return request.serializeBinary();
-    },
-    nina$api$grpc_compro_category_pb.GetCategoryResponse.deserializeBinary
-  );
-
-  get(
-    request: google_protobuf_empty_pb.Empty,
-    metadata: grpcWeb.Metadata | null): Promise<nina$api$grpc_compro_category_pb.GetCategoryResponse>;
-
-  get(
-    request: google_protobuf_empty_pb.Empty,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_compro_category_pb.GetCategoryResponse) => void): grpcWeb.ClientReadableStream<nina$api$grpc_compro_category_pb.GetCategoryResponse>;
-
-  get(
-    request: google_protobuf_empty_pb.Empty,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_compro_category_pb.GetCategoryResponse) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/nina.ComproCategoryService/Get',
-        request,
-        metadata || {},
-        this.methodDescriptorGet,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/nina.ComproCategoryService/Get',
-    request,
-    metadata || {},
-    this.methodDescriptorGet);
-  }
-
-  methodDescriptorPost = new grpcWeb.MethodDescriptor(
-    '/nina.ComproCategoryService/Post',
-    grpcWeb.MethodType.UNARY,
-    nina$api$grpc_compro_category_pb.PostCategoryRequest,
-    google_protobuf_empty_pb.Empty,
-    (request: nina$api$grpc_compro_category_pb.PostCategoryRequest) => {
-      return request.serializeBinary();
-    },
-    google_protobuf_empty_pb.Empty.deserializeBinary
-  );
-
-  post(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
-    metadata: grpcWeb.Metadata | null): Promise<google_protobuf_empty_pb.Empty>;
-
-  post(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: google_protobuf_empty_pb.Empty) => void): grpcWeb.ClientReadableStream<google_protobuf_empty_pb.Empty>;
-
-  post(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: google_protobuf_empty_pb.Empty) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/nina.ComproCategoryService/Post',
-        request,
-        metadata || {},
-        this.methodDescriptorPost,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/nina.ComproCategoryService/Post',
-    request,
-    metadata || {},
-    this.methodDescriptorPost);
-  }
-
   methodDescriptorCategoryGet = new grpcWeb.MethodDescriptor(
     '/nina.ComproCategoryService/CategoryGet',
     grpcWeb.MethodType.UNARY,
     google_protobuf_empty_pb.Empty,
-    nina$api$grpc_compro_category_pb.GetCategoryResponse,
+    nina$api$grpc_compro_category_pb.CategoryGetResponse,
     (request: google_protobuf_empty_pb.Empty) => {
       return request.serializeBinary();
     },
-    nina$api$grpc_compro_category_pb.GetCategoryResponse.deserializeBinary
+    nina$api$grpc_compro_category_pb.CategoryGetResponse.deserializeBinary
   );
 
   categoryGet(
     request: google_protobuf_empty_pb.Empty,
-    metadata: grpcWeb.Metadata | null): Promise<nina$api$grpc_compro_category_pb.GetCategoryResponse>;
+    metadata: grpcWeb.Metadata | null): Promise<nina$api$grpc_compro_category_pb.CategoryGetResponse>;
 
   categoryGet(
     request: google_protobuf_empty_pb.Empty,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_compro_category_pb.GetCategoryResponse) => void): grpcWeb.ClientReadableStream<nina$api$grpc_compro_category_pb.GetCategoryResponse>;
+               response: nina$api$grpc_compro_category_pb.CategoryGetResponse) => void): grpcWeb.ClientReadableStream<nina$api$grpc_compro_category_pb.CategoryGetResponse>;
 
   categoryGet(
     request: google_protobuf_empty_pb.Empty,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: nina$api$grpc_compro_category_pb.GetCategoryResponse) => void) {
+               response: nina$api$grpc_compro_category_pb.CategoryGetResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -168,26 +82,26 @@ export class ComproCategoryServiceClient {
   methodDescriptorCategoryPost = new grpcWeb.MethodDescriptor(
     '/nina.ComproCategoryService/CategoryPost',
     grpcWeb.MethodType.UNARY,
-    nina$api$grpc_compro_category_pb.PostCategoryRequest,
+    nina$api$grpc_compro_category_pb.CategoryPostRequest,
     google_protobuf_empty_pb.Empty,
-    (request: nina$api$grpc_compro_category_pb.PostCategoryRequest) => {
+    (request: nina$api$grpc_compro_category_pb.CategoryPostRequest) => {
       return request.serializeBinary();
     },
     google_protobuf_empty_pb.Empty.deserializeBinary
   );
 
   categoryPost(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
+    request: nina$api$grpc_compro_category_pb.CategoryPostRequest,
     metadata: grpcWeb.Metadata | null): Promise<google_protobuf_empty_pb.Empty>;
 
   categoryPost(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
+    request: nina$api$grpc_compro_category_pb.CategoryPostRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
                response: google_protobuf_empty_pb.Empty) => void): grpcWeb.ClientReadableStream<google_protobuf_empty_pb.Empty>;
 
   categoryPost(
-    request: nina$api$grpc_compro_category_pb.PostCategoryRequest,
+    request: nina$api$grpc_compro_category_pb.CategoryPostRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
                response: google_protobuf_empty_pb.Empty) => void) {
