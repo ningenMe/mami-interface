@@ -36,7 +36,7 @@ message CategoryPostRequest {
 message Topic {
   string topicId = 1;
   string topicDisplayName = 2;
-  string topicOrder = 3;
+  int32 topicOrder = 3;
   repeated Problem problemList = 4;
 }
 message TopicGetRequest {

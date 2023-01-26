@@ -1180,7 +1180,7 @@ proto.nina.Topic.toObject = function(includeInstance, msg) {
   var f, obj = {
     topicid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     topicdisplayname: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    topicorder: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    topicorder: jspb.Message.getFieldWithDefault(msg, 3, 0),
     problemlistList: jspb.Message.toObjectList(msg.getProblemlistList(),
     proto.nina.Problem.toObject, includeInstance)
   };
@@ -1228,7 +1228,7 @@ proto.nina.Topic.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTopicdisplayname(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setTopicorder(value);
       break;
     case 4:
@@ -1280,8 +1280,8 @@ proto.nina.Topic.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getTopicorder();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       3,
       f
     );
@@ -1334,20 +1334,20 @@ proto.nina.Topic.prototype.setTopicdisplayname = function(value) {
 
 
 /**
- * optional string topicOrder = 3;
- * @return {string}
+ * optional int32 topicOrder = 3;
+ * @return {number}
  */
 proto.nina.Topic.prototype.getTopicorder = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.nina.Topic} returns this
  */
 proto.nina.Topic.prototype.setTopicorder = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 

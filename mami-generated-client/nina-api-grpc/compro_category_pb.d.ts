@@ -128,8 +128,8 @@ export class Topic extends jspb.Message {
   getTopicdisplayname(): string;
   setTopicdisplayname(value: string): Topic;
 
-  getTopicorder(): string;
-  setTopicorder(value: string): Topic;
+  getTopicorder(): number;
+  setTopicorder(value: number): Topic;
 
   getProblemlistList(): Array<Problem>;
   setProblemlistList(value: Array<Problem>): Topic;
@@ -148,7 +148,7 @@ export namespace Topic {
   export type AsObject = {
     topicid: string,
     topicdisplayname: string,
-    topicorder: string,
+    topicorder: number,
     problemlistList: Array<Problem.AsObject>,
   }
 }
